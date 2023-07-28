@@ -1,32 +1,21 @@
-import React, { useState, useEffect } from "react";
+import React from "react";
 import getDaysUntilBirthday from "../modules/getDaysUntilBirthday";
 import getRandomQuote from "../modules/getRandomQuote";
+import useFetchAPI from "../hooks/fetchAPI";
 
 function Quote() {
   const birthday = localStorage.getItem("birthday");
   const userName = localStorage.getItem("userName");
 
   const daysUntilBirthday = getDaysUntilBirthday(birthday);
-  const [allQuotes, setAllQuotes] = useState([]);
 
-  const quoteUrl = "https://type.fit/api/quotes";
-
-  useEffect(() => {
-    const getAllQuotes = async () => {
-      try {
-        const result = await fetch(quoteUrl);
-        if (result.ok) {
-          const quotes = await result.json();
-          setAllQuotes(quotes);
-        }
-      } catch (error) {
-        console.log(error);
-      }
-    };
-    getAllQuotes();
-  }, []);
+  const { data, error } = useFetchAPI("https://type.fit/api/quotes");
+  const allQuotes = data;
 
   const createQuoteMessage = () => {
+    if (error) {
+      return <div>Error: {error.message}</div>;
+    }
     if (Array.isArray(allQuotes) && allQuotes.length > 0) {
       const randomQuote = getRandomQuote(allQuotes);
       return (

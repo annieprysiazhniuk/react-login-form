@@ -57,9 +57,8 @@ function Signup({ isFormDisabled, onUserLogin }) {
         localStorage.setItem("userName", firstName);
         localStorage.setItem("signedIn", "signedIn");
 
-        onUserLogin(true); //set User State to Logged in
-
         set(ref(db, "users/" + userCredential.user.uid), userData).then(() => {
+          onUserLogin(true); //set User State to Logged in
           history.push("/quote");
         });
       })
