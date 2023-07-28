@@ -1,24 +1,33 @@
-import logo from './logo.svg';
-import './App.css';
+import React, { useState, useEffect } from "react";
+import "./App.css";
+import { BrowserRouter as Router } from "react-router-dom";
+
+import checkUserAuthentication from "./modules/changeUserState";
+
+import Header from "./components/Header";
+import Main from "./components/Main";
 
 function App() {
+  const [isFormDisabled, setIsFormDisabled] = useState(false); //use State to track if User logged in
+
+  useEffect(() => {
+    const checkAuthentication = async () => {
+      const isUserLoggedIn = await checkUserAuthentication();
+      setIsFormDisabled(isUserLoggedIn);
+    };
+    checkAuthentication();
+  }, []);
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <Router>
+      <div className="App">
+        <Header
+          isFormDisabled={isFormDisabled}
+          setIsFormDisabled={setIsFormDisabled}
+        />
+        <Main isFormDisabled={isFormDisabled} onUserLogin={setIsFormDisabled} />
+      </div>
+    </Router>
   );
 }
 

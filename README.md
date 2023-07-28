@@ -1,3 +1,36 @@
+# Assignment 7: Integrating React with Assignment 6
+
+This assignment is designed to enable you to practice several important concepts including:
+
+- React components,
+- props,
+- how to integrate react into your projects modularly.
+
+For this assignment, you will be using the code you have from assignment 6 (Firebase Birthday Counter) as a starting point. You will be replacing the sign-in/register form(s) that you currently have with React components.
+
+## A: Assignment Requirements
+
+❏ Create an InputField component that props for the appropriate data. For example: name, label,
+value, placeholder, etc.
+
+❏ React components for your login and register forms. Use the InputField component you created
+for the form fields.
+
+❏ Display the appropriate form to the user according the user’s auth state. If the user is not logged in, display the sign in form with an option to toggle to the registration form, as shown in the sample.
+
+❏ Do not show both forms at the same time.
+
+❏ Working functionality from the previous assignment
+
+❏ If the user’s birthday is not today, display the number of days left until their birthday
+
+❏ If the user’s birthday is today, display a happy birthday message with their name and a
+random quote from the https://type.fit/api/quotes API endpoint
+
+❏ Logout functionality
+
+❏ User experience
+
 # Getting Started with Create React App
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
